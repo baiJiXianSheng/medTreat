@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<link rel="import" href="./header.tpl?__inline">
+		<title></title>
+		<style type="text/css">
+			.cl_info {}
+			
+			.cl_info input,
+			.cl_info select {
+				width: 70%;
+				color: initial;
+			}
+			
+			.cl_info input[disabled],
+			.cl_info select[disabled] {
+				background: transparent;
+				color: white;
+				border: none;
+				opacity: 1;
+			}
+			/*.cl_info select {
+				-webkit-appearance:menulist;
+
+			}*/
+			
+			.cl_info label {
+				text-align: left;
+				margin: 0 10px;
+			}
+			
+			.cl_info>h3 {
+				margin-bottom: 10px;
+				padding: 5px;
+				border-bottom: 1px solid white;
+			}
+			
+			.small_input input,
+			.small_input select {
+				padding: 0 5px;
+				margin: 0 10px;
+				height: 25px;
+			}
+			
+			.small_input>div {
+				/*height: 25px;*/
+			}
+			
+			.small_input>div:last-child {
+				/*height: 35px;*/
+			}
+		</style>
+	</head>
+
+	<body class="c_gray_color">
+		<link rel="import" href="./contHeader.tpl?__inline" />
+		<div class="mui-content">
+
+			<div id="content" class="">
+				<div v-cloak v-show="tab==1" v-el:new_client class="c_margin">
+
+					<div class="cl_info c_link_background">
+
+						<h3 class="mui-clearfix"><span>建立档案</span></h3>
+						<div><label for="">姓名</label><input type="text" name="name" id="" v-model="user.name" /></div>
+						<div><label for="">电话</label><input type="tel" name="tel" id="" v-model="user.tel" v-on:input="inpTel" /></div>
+						<div><label for="">年龄</label>
+							<select name="age" v-model="user.age">
+								<option value="0-14">0-14岁</option>
+								<option value="15-24">15-24岁</option>
+								<option value="25-34" selected>25-34岁</option>
+								<option value="35-44">35-44岁</option>
+								<option value="45-74">45-74岁</option>
+								<option value="75-120">75-120岁</option>
+							</select>
+						</div>
+						<div><label for="">会员</label>
+							<select name="isVip" v-model="user.isVip">
+								<option value="是">是</option>
+								<option value="否">否</option>
+							</select>
+						</div>
+						<div><label for="">小区</label><input type="text" v-model="user.village" /></div>
+					</div>
+					<div>
+						建立档案查询和服务更方便
+					</div>
+					<div class="">
+						<button type="button" class="mui-btn c_link_background" v-on:tap="createDoc">确定</button>
+						<p></p>
+						<button type="button" class="mui-btn bt_noFix"><a href="#">不建立档案</a></button>
+					</div>
+
+				</div>
+
+				<div v-cloak v-show="tab==2" v-el:old_client class="c_margin">
+					<div class="cl_info c_link_background c_margin small_input">
+
+						<h3 class="mui-clearfix"><span>信息确认</span><button type="button" style="float:right;" class="c_link_background" @tap="edit"><span v-if="!isEdit">编辑</span><span v-else>保存</span></button></h3>
+						<div><label for="">姓名</label><input disabled="disabled" type="text" v-model="user.name"></div>
+						<div><label for="">电话</label><input disabled="disabled" type="tel" v-model="user.tel" v-on:input="inpTel"></div>
+						<div><label for="">年龄</label>
+							<select disabled="disabled" name="age" v-model="user.age">
+								<option value="0-14">0-14岁</option>
+								<option value="15-24">15-24岁</option>
+								<option value="25-34" selected>25-34岁</option>
+								<option value="35-44">35-44岁</option>
+								<option value="45-74">45-74岁</option>
+								<option value="75-120">75-120岁</option>
+							</select>
+						</div>
+						<div><label for="">会员</label>
+							<select disabled="disabled" name="isVip" v-model="user.isVip">
+								<option value="是">是</option>
+								<option value="否">否</option>
+							</select>
+						</div>
+						<div style="padding-bottom: 10px;"><label for="">小区</label><input disabled="disabled" type="text" v-model="user.village"></div>
+
+					</div>
+					<div>
+						确认信息后开始本次治疗
+					</div>
+					<div class="">
+						<button type="button" class="mui-btn c_link_background" v-on:tap="takePic">本次拍照</button>
+						<p></p>
+						<button type="button" class="mui-btn bt_noFix"><a href="#">往期照片</a></button>
+					</div>
+				</div>
+
+				<div class="" style="margin-top:100px;">
+					<a href="#">故障申报</a>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			mui.init()
+			var camera = require('../component/camera')
+
+			mui.plusReady(function() {
+
+				var vm = new Vue({
+					el: "#content",
+					data: {
+						tab: 0,
+						user: {
+							name: '',
+							age: '',
+							tel: '',
+							village: '',
+							isVip: '是'
+						},
+						isEdit: false
+					},
+					methods: {
+						inpTel: function(e) {
+							var match = e.target.value.match(/1\d{0,10}/)
+
+							if(match && match[0]) this.user.tel = match[0]
+							else this.user.tel = ''
+							e.target.value = this.user.tel
+
+						},
+						createDoc: function(e) {
+
+							if(this.user.tel && this.user.tel.length > 0 && this.user.tel.length < 11) {
+								alert('电话不全')
+								return
+							}
+							//save data
+							this.tab = 2 //old client
+
+						},
+						//old_client
+						takePic: function(e) {
+							camera.takePic(function(file, entry) {
+								//console.log(entry.toLocalURL())
+								mui.createOpenWindow({
+									url: 'confirmPic.html',
+									id: 'confirmPic'
+								}, {
+									name: 'postPic',
+									data: entry.toLocalURL()
+								})
+
+								//console.log('wvb: ' + wbv.picturePath)
+
+							})
+						},
+						edit: function(e) {
+							//this.tab = 1 // for edit 
+							if(this.user.tel && this.user.tel.length > 0 && this.user.tel.length < 11) {
+								alert('电话不全')
+								return
+							}
+
+							this.isEdit = !this.isEdit
+							//console.log(this.isEdit)
+							if(this.isEdit) {
+								mui.each(this.$els.old_client.querySelectorAll('[disabled]'), function(index, item) {
+									//console.log(item)
+									item.removeAttribute('disabled')
+								})
+							} else {
+								mui.each(this.$els.old_client.querySelectorAll('input,select'), function(index, item) {
+									//console.log(item)
+									item.setAttribute('disabled', 'disabled')
+								})
+							}
+						}
+					},
+					computed: {},
+					events: {
+
+					}
+				})
+
+				document.addEventListener('tabIndex', function(e) {
+					vm.tab = e.detail
+					if(vm.tab == 1) vm.isEdit = false //reset
+				})
+
+			})
+		</script>
+
+	</body>
+
+</html>

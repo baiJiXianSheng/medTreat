@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<link rel="import" href="./header.tpl?__inline" />
+		<title></title>
+
+	</head>
+
+	<body class="c_gray_color">
+		<link rel="import" href="./contHeader.tpl?__inline" />
+		<div class="mui-content" id="content">
+			<section class="c_marginTop c_margin">
+				<div>
+					<input type="tel" name="" id="clientTel" placeholder="请输入客户手机号码" v-model="tel" @input="input" /><br />
+					<label>系统会自动判断是否为新用户</label>
+
+				</div>
+				<div>
+					<label style="font-size:0.8em;">请输入11位手机号</label>
+					<!--<button type="button" class="mui-btn c_link_background" id="ok">确定</button>-->
+				</div>
+				<div style="margin-top: 160px;">
+					<a href="#" class="c_gray_color">故障申报</a>
+				</div>
+			</section>
+		</div>
+
+		<script type="text/javascript">
+			mui.init({
+				preloadPages: [{
+					url: 'clientInfo.html',
+					id: 'clientInfo'
+				}]
+			})
+			var clientTel = document.getElementById("clientTel")
+
+			var vm = new Vue({
+				el: '#content',
+				data: {
+					tel: ''
+				},
+				methods: {
+					input: function(e) {
+						var arr = this.tel.match(/1\d{0,10}/)
+						if(arr) this.tel = arr[0]
+						else this.tel = ''
+
+						e.target.value = this.tel
+					}
+				}
+			})
+
+			clientTel.addEventListener('input', function(e) {
+				var arr = e.target.value.match(/1\d{0,10}/)
+				if(arr) e.target.value = arr[0]
+
+			})
+
+			mui.plusReady(function() {
+				vm.$watch('tel', function(n, o) {
+					if(n && n.length == 11) {
+						//validate user
+						//......
+
+						//open page for old or new client
+
+						mui.confirm('新用户？', null, ['yes', 'no'], function(e) {
+							mui.createOpenWindow({
+								url: 'clientInfo.html',
+								id: 'clientInfo'
+							}, {
+								name: 'tabIndex',
+								data: e.index + 1
+							})
+
+							vm.tel = '' //reset tel
+						})
+
+					}
+				})
+
+				//				document.getElementById("ok").addEventListener('tap', function(e) {
+				//					mui.confirm(clientTel, null, ['ok', 'cancel'], function(e) {
+				//
+				//					})
+				//
+				//				})
+			})
+		</script>
+	</body>
+
+</html>

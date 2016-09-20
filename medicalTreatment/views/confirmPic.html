@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<link rel="import" href="./header.tpl?__inline">
+		<title></title>
+
+		<style type="text/css">
+			.content {}
+			
+			.content>div {
+				padding: 3px 3px;
+			}
+			
+			.content>div:nth-child(1) {
+				display: inline-block;
+				width: 54%;
+				background-size: cover;
+				height: 0;
+				padding-bottom: 75%;
+				border: 1px dashed lightgray;
+			}
+			
+			.content>div:nth-child(2) {
+				display: inline-block;
+				width: 44%;
+				vertical-align: top;
+			}
+			
+			.symptom>div {
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+
+	<body class="c_gray_color">
+		<link rel="import" href="./contHeader.tpl?__inline" />
+		<div class="mui-content" id="content">
+			<section class="c_margin">
+				<div class="content">
+					<div :style="'background-image:url('+picture+')'">
+						<!--	<img :src="picture" style="width:100%;" />-->
+
+					</div>
+					<div class="c_margin symptom" @tap="choice">
+						<h3>第一次护理</h3>
+						<p>选择病症(可多选)</p>
+						<div class="mui-clearfix"><button type="button" class="mui-btn mui-block c_link_background" style="margin: 0;">脚气</button></div>
+						<div class="mui-clearfix"><button type="button" class="mui-btn bt_noFix mui-pull-left">灰甲</button> <button type="button" class="mui-btn bt_noFix" style="float:right;">鸡眼</button></div>
+						<div class="mui-clearfix"><button type="button" class="mui-btn bt_noFix mui-pull-left">疣瘊</button> <button type="button" class="mui-btn bt_noFix" style="float:right;">干裂</button></div>
+						<div class="mui-clearfix"><button type="button" class="mui-btn bt_noFix mui-pull-left">嵌甲</button> <button type="button" class="mui-btn bt_noFix" style="float:right;">甲沟炎</button></div>
+
+					</div>
+					<div class="c_blockMargin" style="width:50%;">
+						{{new Date | dateFormat }}
+					</div>
+				</div>
+				<hr />
+				<div class="" style="margin-top:80px;">
+					<button type="button" class="mui-btn c_link_background" v-on:tap="saveSymptom">确定</button>
+					<p></p>
+					<button type="button" class="mui-btn bt_noFix" v-on:tap="takePic">重新拍摄</button><br>
+					<a href="#" class="mui-pull-left" style="position:relative;bottom:30px;">故障申报</a>
+				</div>
+			</section>
+
+		</div>
+
+		<script type="text/javascript">
+			mui.init()
+			
+			var camera = require('../component/camera')
+			
+			mui.plusReady(function() {
+				//				var cwv = plus.webview.currentWebview()
+				//					alert(cwv.picturePath)
+				var vm = null;
+				vm = new Vue({
+					el: '#content',
+					data: {
+						picture: ''
+					},
+					methods: {
+						choice: function(e) {
+							if(e.target.tagName == 'BUTTON')
+								e.target.classList.toggle('c_link_background')
+						},
+						saveSymptom: function(e) {
+							//save logical
+							mui.createOpenWindow({
+								url: 'upSucessInfo.html',
+								id: 'upSucessInfo'
+							}, {
+								name: 'postPic',
+								data: this.picture
+							})
+
+						},
+						takePic: function(e) {
+							camera.takePic(function(file, entry) {
+								this.picture = entry.toLocalURL()
+									//console.log(this.picture)
+							}.bind(this))
+						}
+					}
+				})
+
+				//vm.picture = plus.io.convertAbsoluteFileSystem(vm.picture)
+				//console.log(vm.picture)
+				document.addEventListener('postPic', function(e) {
+					vm.picture = e.detail ? e.detail : ''
+					//alert(vm.picture)
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

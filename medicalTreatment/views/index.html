@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<link rel="import" href="./header.tpl?__inline">
+		<link rel="stylesheet" href="../css/index.css">
+		<title></title>
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">生成病例</h1>
+			<button type="button" id="lesson" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">教程</button>
+		</header>
+		<div class="mui-content">
+			<section class="c_margin" style="margin-top:30px;">
+				<div style="text-align:center;">
+					<button class="bigBT bigBTAni" id="createCase">
+						<span>生成</span><br />
+						<span>案例</span>
+					</button>
+				</div>
+				<div style="margin-top:100px;">
+					<button type="button" class="mui-btn mui-btn-blue c_link_background" id="showCases">病例展示</button><br>
+					<button type="button" class="mui-btn" style="margin-top:10px;">故障申报</button>
+				</div>
+				<div>
+					<span class="c_link_color">注册</span>
+				</div>
+			</section>
+		</div>
+
+		<script type="text/javascript">
+			mui.init({
+				preloadPages: [{
+					url: 'recognize.html',
+					id: 'recognize'
+				}],
+				styles: {
+					popGesture: 'none'
+				},
+				keyEventBind: {
+					backbutton: false
+				}
+			})
+
+			mui.plusReady(function() {
+				//				var dt = require('/component/cityData')
+				//				console.log(dt)
+				document.querySelector('.bigBTAni').classList.remove('bigBTAni')
+				plus.webview.currentWebview().setStyle({
+					'popGesture': 'none'
+				})
+				
+				document.getElementById("createCase").addEventListener('tap', function(e) {
+						mui.openWindow({
+							url: 'recognize.html',
+							id: 'recognize'
+
+						})
+					})
+					//lesson
+				document.getElementById("lesson").addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'home.html',
+						id: 'home',
+						show: {
+							aniShow: 'fade-in'
+						}
+
+					})
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

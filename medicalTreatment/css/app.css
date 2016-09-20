@@ -1,0 +1,122 @@
+/*
+ * @require mui.min.css
+ * 
+ * */
+
+/*used to overwrite css from mui*/
+
+.mui-btn,
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {
+	border-radius: 7px;
+}
+
+.mui-btn-block {
+	padding: 8px 12px;
+}
+
+.mui-input-row .mui-switch {
+	margin-right: 5px;
+}
+
+.mui-table-view {
+	background: transparent;
+	/*let cell has color, not table view, when has .app-table-view-divider it's useful */
+}
+
+.mui-table-view-cell {
+	background: #fff;
+}
+
+.mui-content {}
+
+a{
+	color:inherit;
+}
+
+/*temp style*/
+
+.mui-btn.bt_noFix{
+	padding:6px 12px;
+}
+
+.mui-btn {
+	padding:10px 50px;
+}
+
+
+
+/*.mui-table-view-cell.icon-cell {
+	padding-top: 9px;
+	padding-bottom: 9px;
+}*/
+
+
+/*my style*/
+
+.app-chat-bar {
+	padding: 7px 60px 7px 30px;
+}
+
+.app-chat-bar input {
+	margin: 0;
+	padding: 7px 15px;
+	height: 35px;
+}
+
+.app-chat-bar>span {
+	position: absolute !important;
+	display: table;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+}
+
+.app-input-row {
+	position: relative;
+	white-space: nowrap;
+	margin-bottom: 15px;
+}
+
+.app-input-row>label,
+.app-input-row>input {
+	display: inline-block;
+	margin: 0;
+}
+
+.app-input-row>label {
+	width: 60px;
+	text-align: right;
+	margin-right: 5px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.app-input-row>label~input {
+	width: 75%;
+	width: calc(100% - 70px);
+	border: 1px solid #eee;
+	border-radius: 5px;
+	padding-left: 10px;
+	background: white;
+}
+
+.mui-ios .app-header {
+	background: black;
+	color: white;
+}
+
+.mui-ios .app-header .mui-title {
+	color: white;
+}
+
+
+/*custom font icon*/
+
+@import url("./inlineSrc/iconfont.css?__inline");
+
+/*ios icon*/
+
+@import url("./inlineSrc/iosIcon.css?__inline");

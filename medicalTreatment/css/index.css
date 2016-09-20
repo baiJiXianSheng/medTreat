@@ -1,0 +1,33 @@
+/*
+ * @require common.css
+ * 
+ * */
+
+.marginTop {
+	margin-top: 160px;
+}
+
+.bigBT {
+	width: 270px;
+	height: 270px;
+	display: inline-block;
+	box-shadow: 2px 2px 2px 5px lightgray;
+	background: #269fff;
+	color: white;
+	font-size: 4em;
+	/*68px height*/
+	text-align: center;
+	border-radius: 50%;
+	line-height: 1;
+	transition: transform ease 0.7s;
+	/*padding-top:67px;*/
+	/*-webkit-appearance:button;*/
+}
+
+.bigBT:enabled:active {
+	background: #0085ef;
+}
+
+.bigBTAni {
+	transform: scale(0.3);
+}

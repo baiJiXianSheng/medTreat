@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<link rel="import" href="./header.tpl?__inline">
+		<title></title>
+		<style type="text/css">
+			.span_mg span {
+				margin: 0 10px;
+			}
+		</style>
+	</head>
+
+	<body class="c_gray_color">
+		<link rel="import" href="./contHeader.tpl?__inline" />
+		<div class="mui-content" id="content">
+			<section class="c_margin">
+				<div class="c_blockMargin">
+					<img src="../img/uploadYun.png" />
+					<div style="display:inline-block;margin-left:10px;">
+						<h3>上传成功</h3>
+						<p>{{new Date() | dateFormat}}</p>
+					</div>
+
+				</div>
+				<hr>
+				<div class="span_mg c_blockMargin" style="text-align: left;line-height: 1.5;">
+					<span>第一次护理</span><br>
+					<span>会员：是</span><br>
+					<span>旷先生</span><span>脚气</span>
+				</div>
+				<hr>
+				<div class="" style="margin-top:80px;">
+					<button type="button" class="mui-btn c_link_background" v-on:tap="ok">确定</button>
+					<p></p>
+					<button type="button" class="mui-btn bt_noFix" v-on:tap="takePicAgain">再拍一张</button><br>
+
+					<div style="margin-top:80px;">
+						<a href="#" class="" style="">查看他的其它照片</a><br>
+						<p></p>
+						<a href="#errorRise" class="" style="">故障申报</a>
+					</div>
+
+				</div>
+			</section>
+		</div>
+
+		<script type="text/javascript">
+			mui.init()
+
+			mui.plusReady(function() {
+
+				var camera = require('../component/camera')
+
+				var vm = new Vue({
+					el: "#content",
+					picture: '',
+					data: {
+
+					},
+					methods: {
+						ok: function(e) {
+							mui.openWindow('index.html', 'index', {})
+						},
+						takePicAgain: function(e) {
+							camera.takePic(function(file, fileEntry) {
+								var localPath = fileEntry.toLocalURL()
+								mui.createOpenWindow({
+									url: 'confirmPic.html',
+									id: 'confirmPic'
+								}, {
+									name: 'postPic',
+									data: localPath
+								}, function(wv, type) {
+
+									//console.log('camera, %o', camera)
+										//plus.webview.close('upSucessInfo')
+
+								})
+
+							})
+						}
+					}
+				})
+
+				document.addEventListener('postPic', function(e) {
+					vm.picture = e.detail ? e.detail : ''
+					//alert(vm.picture)
+				})
+
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<link rel="import" href="./views/header.tpl?__inline">
+		<title></title>
+
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false,
+				keyEventBind: {
+					backbutton: false
+				}
+			})
+
+			function judgePlatform() {
+				switch(plus.os.name) {
+					case "Android":
+						break;
+					case "IOS":
+						break;
+					default:
+						break;
+				}
+
+			}
+
+			mui.plusReady(function() {
+
+				mui.openWindow({
+						url: './views/index.html',
+						id: 'index',
+						extras: {
+
+						},
+						show: {
+							aniShow: 'none'
+						},
+						styles: {
+
+						}
+
+					})
+					//				plus.ui.alert('message', function(e) {
+					//					console.log(e);
+					//				}, 'title', 'ok')
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,126 @@
+/*
+ * @require app.css
+ * 
+ * */
+
+/*initial html element*/
+
+* {
+	box-sizing: border-box;
+}
+
+
+/*
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+button {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	font-style: normal;
+	font-weight: normal;
+}
+
+button,
+input {
+	border-style: none;
+	border-width: 0;
+}
+
+input,
+textarea {
+	-webkit-appearance: none;
+	padding: 0 5px;
+}
+*/
+
+hr {
+	border-style: solid;
+	border-bottom-width: 0 !important;
+}
+
+
+/*initialzation finished*/
+
+body {
+	font-family: 'Heiti SC Light';
+	margin: 0;
+	line-height: 1.4;
+	text-align: center;
+}
+
+body section {
+	margin: 10px 3%;
+}
+
+[v-cloak] {
+	display: none;
+}
+
+.c_margin>div,
+.c_margin>h3 {
+	margin-bottom: 15px;
+}
+
+.c_blockMargin {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.c_icon_label {
+	color: white;
+	background: #157EFB;
+	padding: 2px;
+}
+
+.c_link_color {
+	/*color: #157EFB;*/
+	color: #269fff;
+}
+
+.c_link_background {
+	/*background: #157EFB;*/
+	background: #269fff;
+	color: white;
+}
+
+.c_table_view_cell_divider {
+	padding: 9px 0;
+	position: relative;
+}
+
+.c_icon_noFix {
+	transform: none;
+	margin: 0;
+}
+
+
+/*.c_table_view_cell_divider:after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 15px;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #c8c7cc
+}*/
+
+.c_bt {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.c_marginTop {
+	margin-top: 160px;
+}
+
+.c_gray_color {
+	color: gray;
+}
